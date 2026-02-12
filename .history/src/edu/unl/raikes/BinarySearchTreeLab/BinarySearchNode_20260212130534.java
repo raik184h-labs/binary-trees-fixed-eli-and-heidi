@@ -1,41 +1,41 @@
 package edu.unl.raikes.BinarySearchTreeLab;
 
-// Handles looking for nodes and deleting people
+// TODO: ADD JAVADOC COMMENT 
 class BinarySearchNode {
     protected BinarySearchNode parent;
     protected BinarySearchNode leftChild;
     protected BinarySearchNode rightChild;
     protected Person person;
 
-    // initializes person
+    // TODO: ADD JAVADOC COMMENT
     BinarySearchNode(Person person) {
         this.person = person;
     }
 
-    // puts person into tree
+    // TODO: ADD JAVADOC COMMENT
     boolean insert(Person data) {
-        // same object reference
+        // TODO: ADD COMMENT
         if (data == this.person) {
             return false;
         }
-        // checks if left child is empty
+        // TODO: ADD COMMENT
         else if (Integer.compare(data.key, person.key) < 0) {
-            // if so, set new data
+            // TODO: ADD COMMENT
             if (leftChild == null) {
-                this.setLeftChild(new BinarySearchNode(data));
+                setLeftChild(new BinarySearchNode(data));
                 return true;
-            } // if not, keep going down tree
+            } // TODO: ADD COMMENT
             else {
                 return leftChild.insert(data);
             }
         }
-        // checks if right child is empty
+        // TODO: ADD COMMENT
         else if (Integer.compare(data.key, person.key) > 0) {
-            // if so, set new data
+            // TODO: ADD COMMENT
             if (rightChild == null) {
-                this.setRightChild(new BinarySearchNode(data));
+                setRightChild(new BinarySearchNode(data));
                 return true;
-            } // if not, keep going down tree
+            } // TODO: ADD COMMENT
             else {
                 return rightChild.insert(data);
             }
@@ -43,55 +43,54 @@ class BinarySearchNode {
         return false;
     }
 
-    // looks for a specific key in the tree
+    // TODO: ADD JAVADOC COMMENT
     BinarySearchNode search(int key) {
-        // if left child exists and is < key, return it
-        if (this.leftChild != null && Integer.compare(key, this.person.key) < 0) {
-            return this.leftChild.search(key);
+        // TODO: ADD COMMENT
+        if (leftChild != null && Integer.compare(key, person.key) < 0) {
+            return leftChild.search(key);
         }
-        // else check right
-        else if (this.rightChild != null && Integer.compare(key, this.person.key) > 0) {
-            return this.rightChild.search(key);
+        // TODO: ADD COMMENT
+        else if (rightChild != null && Integer.compare(key, person.key) > 0) {
+            return rightChild.search(key);
         }
-        // if it is the key, return it
+        // TODO: ADD COMMENT
         else if (this.person.key == key) {
             return this;
         }
-        // not found
+        // TODO: ADD COMMENT
         else {
             return null;
         }
     }
 
-    // Deletes person with the key from the tree
+    // TODO: ADD JAVADOC COMMENT
     Person delete(int key) {
-        // checks the node for key
+        // TODO: ADD COMMENT
         BinarySearchNode node = search(key);
         if (node == null)
             return null;
         Person deleted = node.person;
 
-        // if the node has no children, disconnect it from its parent
+        // TODO: ADD COMMENT
         if (node.leftChild == null && node.rightChild == null) {
-            if (node.parent.leftChild == node) {
+            if (node.parent.leftChild == node)
                 node.parent.setLeftChild(null);
-            } else if (node.parent.rightChild == node) {
+            else if (node.parent.rightChild == node)
                 node.parent.setRightChild(null);
-            }
         }
-        // if the node has both children, replace node with the smallest value in the right child tree
+        // TODO: ADD COMMENT
         else if (node.leftChild != null && node.rightChild != null) {
             BinarySearchNode min = node.rightChild.getNodeWithMinValue();
             node.person = min.person;
             int minKey = min.person.key;
             min.delete(minKey);
         }
-        // if the node has just the left child, replace the parents pointer with the child
+        // TODO: ADD COMMENT
         else if (node.parent.leftChild == node) {
             BinarySearchNode newLeftChild = (node.leftChild != null) ? node.leftChild : node.rightChild;
             node.parent.setLeftChild(newLeftChild);
         }
-        // if the node has just the right child, replace the parents pointer with the child
+        // TODO: ADD COMMENT
         else if (node.parent.rightChild == node) {
             BinarySearchNode newRightChild = (node.leftChild != null) ? node.leftChild : node.rightChild;
             node.parent.setRightChild(newRightChild);
@@ -100,7 +99,7 @@ class BinarySearchNode {
         return deleted;
     }
 
-    // Go through the tree all the way to the left until the next node is null, and then return
+    // TODO: ADD JAVADOC COMMENT
     BinarySearchNode getNodeWithMinValue() {
         if (leftChild == null)
             return this;
@@ -108,36 +107,28 @@ class BinarySearchNode {
             return leftChild.getNodeWithMinValue();
     }
 
-    // Sets the left child of a node
+    // TODO: ADD JAVADOC COMMENT
     void setLeftChild(BinarySearchNode child) {
         this.leftChild = child;
         if (child != null)
             child.parent = this;
     }
 
-    // sets the right child of a node
+    // TODO: ADD JAVADOC COMMENT
     void setRightChild(BinarySearchNode child) {
         this.rightChild = child;
         if (child != null)
             child.parent = this;
     }
 
-    // uses in order search to return a string
+    // TODO: ADD JAVADOC COMMENT (WHAT KIND OF SEARCH SHOULD THIS BE???)
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        this.inOrderToString(sb);
-        return sb.toString();
+        String toReturn = "";
+        
+        // TODO: ADD COMMENT
+        toReturn += "  " + person.toString() + "\n";
+
+        return toReturn;
     }
 
-    private void inOrderToString(StringBuilder sb) {
-        if (this.leftChild != null) {
-            this.leftChild.inOrderToString(sb);
-        }
-
-        sb.append("  ").append(this.person).append("\n");
-
-        if (this.rightChild != null) {
-            this.rightChild.inOrderToString(sb);
-        }
-    }
 }

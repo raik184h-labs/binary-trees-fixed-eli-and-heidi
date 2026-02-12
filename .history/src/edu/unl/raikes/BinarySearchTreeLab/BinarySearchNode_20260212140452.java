@@ -14,7 +14,7 @@ class BinarySearchNode {
 
     // puts person into tree
     boolean insert(Person data) {
-        // same object reference
+        // if data already exists
         if (data == this.person) {
             return false;
         }
@@ -22,7 +22,7 @@ class BinarySearchNode {
         else if (Integer.compare(data.key, person.key) < 0) {
             // if so, set new data
             if (leftChild == null) {
-                this.setLeftChild(new BinarySearchNode(data));
+                setLeftChild(new BinarySearchNode(data));
                 return true;
             } // if not, keep going down tree
             else {
@@ -33,7 +33,7 @@ class BinarySearchNode {
         else if (Integer.compare(data.key, person.key) > 0) {
             // if so, set new data
             if (rightChild == null) {
-                this.setRightChild(new BinarySearchNode(data));
+                setRightChild(new BinarySearchNode(data));
                 return true;
             } // if not, keep going down tree
             else {
@@ -46,18 +46,18 @@ class BinarySearchNode {
     // looks for a specific key in the tree
     BinarySearchNode search(int key) {
         // if left child exists and is < key, return it
-        if (this.leftChild != null && Integer.compare(key, this.person.key) < 0) {
-            return this.leftChild.search(key);
+        if (leftChild != null && Integer.compare(key, person.key) < 0) {
+            return leftChild.search(key);
         }
         // else check right
-        else if (this.rightChild != null && Integer.compare(key, this.person.key) > 0) {
-            return this.rightChild.search(key);
+        else if (rightChild != null && Integer.compare(key, person.key) > 0) {
+            return rightChild.search(key);
         }
         // if it is the key, return it
         else if (this.person.key == key) {
             return this;
         }
-        // not found
+        // handles exceptions 
         else {
             return null;
         }
@@ -73,11 +73,10 @@ class BinarySearchNode {
 
         // if the node has no children, disconnect it from its parent
         if (node.leftChild == null && node.rightChild == null) {
-            if (node.parent.leftChild == node) {
+            if (node.parent.leftChild == node)
                 node.parent.setLeftChild(null);
-            } else if (node.parent.rightChild == node) {
+            else if (node.parent.rightChild == node)
                 node.parent.setRightChild(null);
-            }
         }
         // if the node has both children, replace node with the smallest value in the right child tree
         else if (node.leftChild != null && node.rightChild != null) {
@@ -128,14 +127,14 @@ class BinarySearchNode {
         this.inOrderToString(sb);
         return sb.toString();
     }
-
+    
     private void inOrderToString(StringBuilder sb) {
         if (this.leftChild != null) {
             this.leftChild.inOrderToString(sb);
         }
-
+    
         sb.append("  ").append(this.person).append("\n");
-
+    
         if (this.rightChild != null) {
             this.rightChild.inOrderToString(sb);
         }

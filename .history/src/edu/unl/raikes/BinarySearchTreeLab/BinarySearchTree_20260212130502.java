@@ -1,36 +1,36 @@
 package edu.unl.raikes.BinarySearchTreeLab;
 
-// Tree that stores person objects by their keys
+//TODO: ADD JAVADOC COMMENT
 public class BinarySearchTree {
 	boolean verbose = true;
 	private BinarySearchNode root = null;
 	private int size = 0;
 
-	// Inserts person into tree based on key
+	// TODO: ADD JAVADOC COMMENT
 	public void insert(Person data) {
 		boolean inserted = false;
-		// if tree is empty, new person becomes root
+		// TODO: ADD COMMENT
 		if (root == null) {
 			root = new BinarySearchNode(data);
 			inserted = true;
-		} // else you look to the root node
+		} // TODO: ADD COMMENT
 		else {
 			inserted = root.insert(data);
-		} // if you insert, add size
+		} // TODO: ADD COMMENT
 		if (inserted) {
 			size++;
 		}
 	}
 
-	// searches for a person in the tree
+	// TODO: ADD JAVADOC COMMENT
 	public Person search(int key) {
-		// if its empty, return null
+		// TODO: ADD COMMENT
 		if (root == null) {
 			return null;
 		}
-		// recursively search
+		// TODO: ADD COMMENT
 		BinarySearchNode found = root.search(key);
-		// return person in the found node
+		// TODO: ADD COMMENT
 		if (found != null) {
 			return found.person;
 		} else {
@@ -39,42 +39,42 @@ public class BinarySearchTree {
 
 	}
 
-	// deletes person based on key
+	// TODO: ADD JAVADOC COMMENT
 	public Person delete(int key) {
 		Person deleted = null;
 
-		// if empty, no change
+		// TODO: ADD COMMENT
 		if (root == null) {
 			return null;
-		}
+		} // TODO: ADD COMMENT
 		else {
-			// if the root has a key, use a temp parent node
+			// TODO: ADD COMMENT
 			if (root.person.key == key) {
 				// add fake root in case the element to be removed is the root.
 				// (simplifies pointer logic)
 				BinarySearchNode auxRoot = new BinarySearchNode(null);
 				auxRoot.setLeftChild(root);
-				// delete starting at the og root
+				// TODO: ADD COMMENT
 				deleted = root.delete(key);
 				// retrieve the root from the fake root (in case it changed)
 				root = auxRoot.leftChild;
-				// make sure the root has no parent
+				// TODO: ADD COMMENT
 				if (root != null)
 					root.parent = null;
-			} // if deleting a non root node
+			} // TODO: ADD COMMENT
 			else {
 				deleted = root.delete(key);
-			} // decrease size if successful
+			} // TODO: ADD COMMENT
 			if (deleted != null)
 				size--;
 			return deleted;
 		}
 	}
 
-	// returns a string representation of the tree
+	// TODO: ADD JAVADOC COMMENT
 	public String toString() {
 		String toReturn = "Binary Search Tree of Size: " + size + "\n";
-		// if the tree exists, use in order traversal for output
+		// TODO: ADD COMMENT
 		if (root != null) {
 			toReturn += root.toString();
 		}
